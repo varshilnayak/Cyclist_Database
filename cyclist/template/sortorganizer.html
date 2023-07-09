@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Organizer Data
+    </title>
+    <style>
+        table {
+        border-spacing: 1;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 6px;
+        overflow: hidden;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+      }
+
+        * {
+          position: relative;
+        }
+
+        td,
+        th {
+          padding-left: 8px;
+        }
+
+        thead tr {
+          height: 60px;
+          background: #66ccff;
+          font-size: 16px;
+        }
+
+        tbody tr {
+          height: 48px;
+          border-bottom: 1px solid #e3f1d5;
+        }
+
+        td,
+        th {
+          text-align: center;
+        }
+
+      /* <--body style--> */
+
+      body {
+        background-color: black;
+        font: 400 14px "Calibri", "Arial";
+        padding: 20px;
+      }
+      button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        border-radius: 6px;
+        padding: 8px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+      button:hover{
+        background-color: black;
+      }
+      a{
+        padding-bottom: 10px;
+      }
+      </style>
+</head>
+<body>
+    <center>
+        <table>
+            <thead>
+            <tr>
+                <td>
+                    <a href="{% url 'showemp' %}"><button>Home page</button></a>
+                </td>
+                <td>
+                    <a href="{% url 'organizer_temp'%}"> <button> Insert New Organizer Data</button></a>
+                </td>
+            </tr>
+            </thead>
+            
+        </table>
+        <form method="POST" action="/sortOrganizer">
+            {% csrf_token %}
+            <label for="Sort"></label>
+                <select id="Sort" name="Sort">
+                    <option value="organizer_id">Organizer ID</option>
+                    <option value="organizer_name">Organizer Name</option>
+                
+                    
+                </select>
+                <input type="submit" value="Sort"/>
+        </form>
+        {% csrf_token %}
+        <table >
+            <thead>
+            <tr>
+                <th> 
+                    Organizer_id
+                </th>
+                <th>Organizer_name</th>
+                <th>Contact</th>
+                <th>Address</th>
+               <th></th>
+               <th></th>
+            </tr>
+        </thead>
+            {% for result in data %}
+<tbody>
+            <tr>
+                <td> {{result.organizer_id}}</td>
+                <td> {{result.organizer_name}}</td>
+                 <td> {{result.contact}}</td>
+                 <td> {{result.address}}</td>
+                 <td> <a href="organizer_editemp/{{result.organizer_id}}"><button>Edit</button></a></td>
+                <td> <a href="organizer_delemp/{{result.organizer_id}}" onclick="return confirm('are you sure to want to delete ?')"> <button>Delete</button></a></td>
+            </tr>
+        </tbody>
+            {% endfor %}    
+        </table>
+    </center>
+    <center>
+      
+    </center>
+</body>

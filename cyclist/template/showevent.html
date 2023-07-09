@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<head>
+    <title>
+       event data
+    </title>
+    <style>
+        table {
+        border-spacing: 1;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 6px;
+        overflow: hidden;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+      }
+
+        * {
+          position: relative;
+        }
+
+        td,
+        th {
+          padding-left: 8px;
+        }
+
+        thead tr {
+          height: 60px;
+          background: #66ccff;
+          font-size: 16px;
+        }
+
+        tbody tr {
+          height: 48px;
+          border-bottom: 1px solid #e3f1d5;
+        }
+
+        td,
+        th {
+          text-align: center;
+        }
+
+      /* <--body style--> */
+
+      body {
+        background-color: black;
+        font: 400 14px "Calibri", "Arial";
+        padding: 20px;
+      }
+      button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        border-radius: 6px;
+        padding: 8px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+      button:hover{
+        background-color: black;
+      }
+      a{
+        padding-bottom: 10px;
+      }
+      </style>
+</head>
+<body>
+    <center>
+      <table>
+        <thead>
+        <tr>
+            <td>
+                <a href="{% url 'showemp' %}"><button> HOME PAGE</button> </a>
+            </td>
+            <td>
+                <a href="{% url 'event_temp'%}"> <button>Insert New Event Data</button></a>
+            </td>
+        </tr>
+      </thead>
+    </table>
+   <br>
+   <form method="POST" action="/sortevent">
+    {% csrf_token %}
+    <label for="Sort"></label>
+        <select id="Sort" name="Sort">
+            <option value="event_id">Event ID</option>
+            <option value="event_name">Event Name</option>
+            <option value="date">Date</option>
+            
+            
+        </select>
+        <input type="submit" value="Sort"/>
+</form>
+        {% csrf_token %}
+        <div class="tableFixHead">
+        <table >
+          <thead>
+            <tr>
+                <th> 
+                    Event_id
+                </th>
+                <th>Event_name</th>
+                <th>Event_type</th>
+                <th> Location</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th> Organizer_id </th>
+                <th></th>
+                <th></th>
+            </tr>
+          </thead>
+            {% for result in data %}
+            <tbody>
+            <tr>
+                <td> {{result.event_id}}</td>
+                <td> {{result.event_name}}</td>
+                 <td> {{result.event_type}}</td>
+                 <td> {{result.location}}</td>
+                 <td> {{result.date}}</td>
+                 <td> {{result.time}}</td>
+                 <td> {{result.organizer}}</td>
+                 
+                 <td> <a href="event_editemp/{{result.event_id}}"><button>Edit</button></a></td>
+                 <td> <a href="event_delemp/{{result.event_id}}" onclick="return confirm('Are you sure want to delete record ?')"><button>Delete</button></a></td>
+            </tr>
+          </tbody>
+            {% endfor %}    
+        </table>
+        </div>
+    </center>
+    
+</body>

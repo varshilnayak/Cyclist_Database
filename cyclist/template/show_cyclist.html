@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<head>
+  <title>
+    Cyclist Data
+  </title>
+  <style>
+    table {
+        border-spacing: 1;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 6px;
+        overflow: hidden;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+      }
+
+        * {
+          position: relative;
+        }
+
+        td,
+        th {
+          padding-left: 8px;
+        }
+
+        thead tr {
+          height: 60px;
+          background: #66ccff;
+          font-size: 16px;
+        }
+
+        tbody tr {
+          height: 48px;
+          border-bottom: 1px solid #e3f1d5;
+        }
+
+        td,
+        th {
+          text-align: center;
+        }
+
+      /* <--body style--> */
+
+      body {
+        background-color: black;
+        font: 400 14px "Calibri", "Arial";
+        padding: 20px;
+      }
+      button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        border-radius: 6px;
+        padding: 8px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+      button:hover{
+        background-color: black;
+      }
+  </style>
+</head>
+
+<body>
+  <center>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <a href="{% url 'showemp' %}"><button> Home Page</button> </a>
+          </th>
+          <th>
+            <a href="{% url 'insert_form'%}"> <button>Insert New Cyclist Data</button></a>
+          </th>
+        </tr>
+      </thead>
+    </table>
+    <br>
+    <form method="POST" action="/sortCyclist">
+      {% csrf_token %}
+
+      <label for="Sort"></label>
+      <select id="Sort" name="Sort">
+        <option value="cyclist_id">Cyclist ID</option>
+        <option value="cyclist_name">Cyclist Name</option>
+        <option value="age">Age</option>
+        <option value="country">Country</option>
+
+      </select>
+      <input type="submit" value="Sort" />
+    </form>
+    
+    {% csrf_token %}
+
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Cyclist_id
+          </th>
+          <th>Cyclist_name</th>
+          <th>Age</th>
+          <th>Country</th>
+          <th>Gender</th>
+          <th>Email_id</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      {% for result in data %}
+      <tbody>
+        <tr>
+          <td> {{result.cyclist_id}}</td>
+          <td> {{result.cyclist_name}}</td>
+          <td> {{result.age}}</td>
+          <td> {{result.country}}</td>
+          <td> {{result.gender}}</td>
+          <td> {{result.email_id}}</td>
+          <td> <a href="editemp/{{result.cyclist_id}}"> <button>Edit</button></a></td>
+          <td> <a href="delemp/{{result.cyclist_id}}"
+              onclick="return confirm('Are you sure want to delete record ?')"><button>Delete</button></a></td>
+        </tr>
+        </tbody>
+      {% endfor %}
+    </table>
+  </center>
+  <center>
+
+  </center>
+</body>

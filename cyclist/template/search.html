@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+    <style>  
+        body  {  
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif; 
+            background-color: #cccccc;
+            height: 500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }  
+        button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        border-radius: 6px;
+        padding: 8px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+      button:hover{
+        background-color: black;
+      }
+    </style>  
+    <title> Query Form </title>
+    <center>
+    <form action="custom_query" method="POST">
+        {% csrf_token %}
+        <label>
+            <b>Input Your Query:</b>
+        </label>
+    
+    <td><input type="text"  placeholder="Enter your Query" name="custom_query" size="200" required></td>
+        <td><input type="submit" value="custom_query"></td>
+    </form>
+    <br>
+</center>
+<center>
+    <a href="{% url 'showemp' %}"><button> Home Page</button> </a>
+</center>
+</head>
+</html>

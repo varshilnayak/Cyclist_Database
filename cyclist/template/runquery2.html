@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Query Output
+    </title>
+    <style>
+      table {
+        border-spacing: 1;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 6px;
+        overflow: hidden;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+      }
+
+        * {
+          position: relative;
+        }
+
+        td,
+        th {
+          padding-left: 8px;
+        }
+
+        thead tr {
+          height: 60px;
+          background: #66ccff;
+          font-size: 16px;
+        }
+
+        tbody tr {
+          height: 48px;
+          border-bottom: 1px solid #e3f1d5;
+        }
+
+        td,
+        th {
+          text-align: center;
+        }
+
+      /* <--body style--> */
+
+      body {
+        background-color: black;
+        font: 400 14px "Calibri", "Arial";
+        padding: 20px;
+      }
+      button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        border-radius: 6px;
+        padding: 8px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+      button:hover{
+        background-color: black;
+      }
+      a{
+        padding-bottom: 10px;
+      }
+      </style>
+</head>
+<body>
+    <center>
+        <table>
+          <thead>
+            <tr>
+                <td>
+            <a href="{% url 'showemp' %}"><button>Home Page</button></a>
+        </td>
+            </tr>
+          </thead>
+          
+        </table>
+        
+        <center> <h1> Query Output </h1></center>
+        {% csrf_token %}
+        <table >
+            <thead>
+                
+              <tr> 
+                <th> Cyclist_name</th>
+                <th> No. of participation </th>
+              
+            
+              </tr> 
+         
+            </thead>
+                
+            
+            {% for result in data %}
+            <tbody>
+            <tr>
+               
+                <td> {{result.0}}</td>
+                <td> {{result.1}}</td>
+                
+            
+            </tr>
+          </tbody>
+            {% endfor %}    
+        </table>
+    </center>
+   
+</body>
